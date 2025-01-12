@@ -26,6 +26,25 @@ export default function Index() {
     }
   }
 
+  const renderItem = ({ item }: { item: { title: string } }) => {
+    return (
+      <View className="flex items-center bg-red-300">
+        <Text>{item.title}</Text>
+
+        <View style={styles.container}>
+          <Button 
+            title="Edit"  
+            color="green"
+          />
+          <Button 
+            title="Delete" 
+            color="red"
+          />
+        </View>
+      </View>
+    )
+  }
+
   return (
     <GestureHandlerRootView style={styles.container}>
       <TextInput 
@@ -38,7 +57,7 @@ export default function Index() {
       <FlatList 
         data={todos}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Text>{item.title}</Text>}
+        renderItem={renderItem}
       />
     </GestureHandlerRootView>
   );
@@ -51,6 +70,13 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    marginBottom: 10
+    marginBottom: 10,
+    padding: 10
+  },
+  btn: {
+    width: 20,
+    height: 20,
+    borderRadius: 20,
+    cursor: "pointer"
   }
 })
