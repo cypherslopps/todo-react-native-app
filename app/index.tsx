@@ -26,7 +26,25 @@ export default function Index() {
     }
   }
 
-  const renderItem = ({ item }: { item: { title: string } }) => {
+  // Edit Todo
+  const editTodo = (todoItem: Todo) => {
+    // Remove todo value from todo list
+    const filteredTodo = todos.filter(({ id }) => id !== todoItem.id);
+    setTodos(filteredTodo);
+
+    // Set todo value
+    setTodo(todoItem.title);
+  }
+
+  // Edit Todo
+  const removeTodo = (todoId: string) => {
+    // Remove todo value from todo list
+    const filteredTodo = todos.filter(({ id }) => id !== todoId);
+    setTodos(filteredTodo);
+  }
+
+
+  const renderItem = ({ item }: { item: Todo }) => {
     return (
     <View style={styles.itemsContainer}>
         <Text style={styles.todoTitle}>{item.title}</Text>
@@ -37,6 +55,7 @@ export default function Index() {
               ...styles.todoUtilsBtn,
               backgroundColor: "teal"
             }}
+            onPress={() => editTodo(item)}
           >
             <Text>Edit</Text>
           </TouchableOpacity>
@@ -46,6 +65,7 @@ export default function Index() {
               ...styles.todoUtilsBtn,
               backgroundColor: "red"
             }}
+            onPress={() => removeTodo(item.id)}
           >
             <Text>Delete</Text>
           </TouchableOpacity>
@@ -82,7 +102,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignContent: "space-between"
   },
   input: {
     borderWidth: 1,
@@ -99,8 +120,9 @@ const styles = StyleSheet.create({
     gap: 6
   },
   todoUtilsBtn: {
-    borderRadius: 20,
+    borderRadius: 5,
     cursor: "pointer",
-    padding: 5
+    paddingHorizontal: 10,
+    paddingVertical: 3
   }
 })
