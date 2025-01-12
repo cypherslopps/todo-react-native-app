@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, StyleSheet, Text, TouchableOpacity, TextInput, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 type Todo = {
@@ -28,18 +28,27 @@ export default function Index() {
 
   const renderItem = ({ item }: { item: { title: string } }) => {
     return (
-      <View className="flex items-center bg-red-300">
-        <Text>{item.title}</Text>
+    <View style={styles.itemsContainer}>
+        <Text style={styles.todoTitle}>{item.title}</Text>
 
-        <View style={styles.container}>
-          <Button 
-            title="Edit"  
-            color="green"
-          />
-          <Button 
-            title="Delete" 
-            color="red"
-          />
+        <View style={styles.todoUtilsContainer}>
+          <TouchableOpacity 
+            style={{
+              ...styles.todoUtilsBtn,
+              backgroundColor: "teal"
+            }}
+          >
+            <Text>Edit</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={{
+              ...styles.todoUtilsBtn,
+              backgroundColor: "red"
+            }}
+          >
+            <Text>Delete</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
@@ -58,6 +67,7 @@ export default function Index() {
         data={todos}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
+        style={{ marginTop: 10 }}
       />
     </GestureHandlerRootView>
   );
@@ -68,15 +78,29 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20
   },
+  itemsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
+  },
   input: {
     borderWidth: 1,
     marginBottom: 10,
     padding: 10
   },
-  btn: {
-    width: 20,
-    height: 20,
+  todoTitle: {
+    fontSize: 18,
+    fontWeight: 500
+  },
+  todoUtilsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    gap: 6
+  },
+  todoUtilsBtn: {
     borderRadius: 20,
-    cursor: "pointer"
+    cursor: "pointer",
+    padding: 5
   }
 })

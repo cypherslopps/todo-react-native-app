@@ -24,9 +24,6 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "packergerOpts": {
-      "transpilePackages": ["nativewind", "react-native-css-interop"]
-    },
     "plugins": [
       "expo-router",
       [

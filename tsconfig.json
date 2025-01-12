@@ -1,12 +1,18 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "jsx": "react-native",
     "strict": true,
+    "baseUrl": "./",
     "paths": {
       "@/*": [
         "./*"
-      ]
-    }
+      ],
+      "*": ["node_modules/*", "nativewind-env.d.ts"]
+    },
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "**/*.ts",
